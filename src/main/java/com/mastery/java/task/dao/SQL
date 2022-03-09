@@ -1,0 +1,9 @@
+CREATE TABLE employee(
+            id BIGSERIAL PRIMARY KEY ,
+            first_name varchar NOT NULL,
+            last_name varchar NOT NULL ,
+            department_id int ,
+            job_title varchar ,
+            gender varchar NOT NULL,
+            date_of_birth date
+    )

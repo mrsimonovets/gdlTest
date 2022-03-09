@@ -5,13 +5,13 @@ import com.mastery.java.task.dto.Employee;
 import java.util.List;
 
 public interface EmployeeDao {
-    public void addEmployee(Employee employee);
+    void addEmployee(Employee employee);
 
-    public void deleteEmployee(int id);
+    void deleteEmployee(int id);
 
-    public void updateEmployee(int id, Employee updatedEmployee);
+    void updateEmployee(int id, Employee updatedEmployee);
 
-    public List<Employee> showEmployees();
+    List<Employee> getAllEmployees();
 
-    public Employee showOneEmployee(int id);
+    Employee getOneEmployee(int id);
 }

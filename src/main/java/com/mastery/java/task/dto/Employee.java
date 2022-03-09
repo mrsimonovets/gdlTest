@@ -1,24 +1,40 @@
 package com.mastery.java.task.dto;
 
 
-import java.util.Date;
+import com.mastery.java.task.validator.ValidAge;
+
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Objects;
 
+@Entity
+@Table(name = "employee")
 public class Employee {
 
-    private int id;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
+    @Column(name = "department_id")
     private int departmentId;
+    @Column(name = "job_title")
     private String jobTitle;
+    @Column(name = "gender")
     private String gender;
-    private Date dateOfBirth;
+
+    @Column(name = "date_of_birth")
+    @ValidAge
+    private LocalDate dateOfBirth;
 
     public Employee() {
     }
 
-    public Employee(int id, String firstName, String lastName, int departmentId, String jobTitle, String gender, Date dateOfBirth) {
-        this.id = id;
+    public Employee(String firstName, String lastName, int departmentId, String jobTitle, String gender, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.departmentId = departmentId;
@@ -27,11 +43,11 @@ public class Employee {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -75,13 +91,14 @@ public class Employee {
         this.gender = gender;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+
 
     @Override
     public String toString() {

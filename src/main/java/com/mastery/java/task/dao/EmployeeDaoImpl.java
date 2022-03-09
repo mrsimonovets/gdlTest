@@ -3,12 +3,11 @@ package com.mastery.java.task.dao;
 import com.mastery.java.task.dto.Employee;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+
 public class EmployeeDaoImpl implements EmployeeDao{
 
     private final JdbcTemplate jdbcTemplate;
@@ -36,15 +35,19 @@ public class EmployeeDaoImpl implements EmployeeDao{
     }
 
     @Override
-    public List<Employee> showEmployees(){
+    public List<Employee> getAllEmployees(){
         return jdbcTemplate.query("SELECT * FROM employee", new BeanPropertyRowMapper<>(Employee.class));
     }
 
     @Override
-    public Employee showOneEmployee(int id){
-        return jdbcTemplate.query("SELECT * FROM employee WHERE employee_id=?",
-                new Object[]{id}, new BeanPropertyRowMapper<>(Employee.class))
-                .stream().findAny().orElse(null);
+    public Employee getOneEmployee(int id){
+//        return jdbcTemplate.query("SELECT * FROM employee WHERE employee_id=?",
+//                new Object[]{id}, new BeanPropertyRowMapper<>(Employee.class))
+//                .stream().findAny().orElse(null);
+
+        String query = "Select * from employees Where employee_id = ?";
+        return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Employee.class), id);
+
     }
 
 }
