@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -26,30 +27,33 @@ public class EmployeeController {
     private final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
     @PostMapping
-    public void addEmployee(@Validated @RequestBody Employee employee){
+    public void addEmployee(@Valid @RequestBody Employee employee){
         logger.info("Add employee");
         employeeService.addEmployee(employee);
     }
 
     @DeleteMapping("/{id}")
     public void deleteEmployee(@PathVariable Long id){
+        logger.info("Delete employee");
         employeeService.deleteEmployee(id);
     }
 
     @PutMapping("/{id}")
     public Employee updateEmployee(@PathVariable Long id , @RequestBody Employee employee){
+        logger.info("Update employee");
         employeeService.updateEmployee(id, employee);
         return employee;
     }
 
     @GetMapping
     public List<Employee> getAllEmployees(){
+        logger.info("Get all employee");
         List<Employee> employees = employeeService.getAllEmployees();
         return employees;
     }
 
     @GetMapping("/{id}")
-    public Employee getEmployeeById(@Validated @PathVariable Long id){
+    public Employee getEmployeeById(@Valid @PathVariable Long id){
         Employee employee = employeeService.getOneEmployee(id);
 
         if (employee == null){
@@ -58,14 +62,15 @@ public class EmployeeController {
                     id + " in Database");
         }
 
+        logger.info("Get one employee by id");
         return employee;
     }
 
     @GetMapping("/name/{firstName}/{lastName}")
     public Employee getEmployeeByFirstAndLastName(@PathVariable String firstName,
                                                         @PathVariable String lastName){
+        logger.info("Get one employee by first and last name");
         return employeeService.getOneEmployeeByFirstAndLastName(firstName, lastName);
-
     }
 
 }

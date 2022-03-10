@@ -7,17 +7,17 @@ import java.time.Period;
 
 public class AgeValidator implements ConstraintValidator<ValidAge, LocalDate> {
 
-    private Integer age;
+    private Integer minimumAge;
 
     @Override
     public void initialize(ValidAge validAge) {
-        this.age = validAge.lower();
+        this.minimumAge = validAge.lower();
     }
 
     @Override
     public boolean isValid(LocalDate dateOfBirth, ConstraintValidatorContext constraintValidatorContext) {
 
-        if (age > Period.between(dateOfBirth, LocalDate.now()).getYears()) return true;
+        if (Period.between(dateOfBirth, LocalDate.now()).getYears() >= minimumAge) return true;
 
         return false;
     }

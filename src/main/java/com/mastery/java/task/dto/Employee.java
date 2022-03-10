@@ -24,8 +24,10 @@ public class Employee {
     private int departmentId;
     @Column(name = "job_title")
     private String jobTitle;
+
     @Column(name = "gender")
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @Column(name = "date_of_birth")
     @ValidAge
@@ -34,7 +36,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String firstName, String lastName, int departmentId, String jobTitle, String gender, LocalDate dateOfBirth) {
+    public Employee(String firstName, String lastName, int departmentId, String jobTitle, Gender gender, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.departmentId = departmentId;
@@ -83,11 +85,11 @@ public class Employee {
         this.jobTitle = jobTitle;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
