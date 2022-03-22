@@ -2,6 +2,10 @@ package com.mastery.java.task.service;
 
 import com.mastery.java.task.dao.EmployeeRepository;
 import com.mastery.java.task.dto.Employee;
+import com.mastery.java.task.exception.MyServiceNotFoundException;
+import com.mastery.java.task.rest.EmployeeController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,14 +20,24 @@ public class EmployeeServiceImpl implements EmployeeService{
         this.employeeRepository = employeeRepository;
     }
 
+    private final Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);
+
     @Override
-    public void addEmployee(Employee employee) {
-        employeeRepository.save(employee);
+    public List<Employee> getAllEmployees(String firstName, String lastName) {
+        return employeeRepository.findAllByFirstNameContainingAndLastNameContaining(firstName, lastName);
     }
 
     @Override
-    public void deleteEmployee(Long id) {
-        employeeRepository.deleteById(id);
+    public Employee getEmployeeById(Long id) {
+        return employeeRepository.findById(id).orElseThrow(() -> {
+            logger.warn("No employee found with id = {}", id);
+            return new MyServiceNotFoundException("There is no employee with id = " + id);
+        });
+    }
+
+    @Override
+    public void addEmployee(Employee employee) {
+        employeeRepository.save(employee);
     }
 
     @Override
@@ -41,17 +55,8 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
+    public void deleteEmployee(Long id) {
+        employeeRepository.deleteById(id);
     }
 
-    @Override
-    public Employee getEmployeeById(Long id) {
-        Employee employee = null;
-        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
-        if (optionalEmployee.isPresent()){
-            employee = optionalEmployee.get();
-        }
-        return employee;
-    }
 }

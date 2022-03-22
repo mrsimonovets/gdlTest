@@ -12,7 +12,7 @@ public interface EmployeeService {
 
     void updateEmployee(Long id, Employee updatedEmployee);
 
-    List<Employee> getAllEmployees();
+    List<Employee> getAllEmployees(String firstName, String lastName);
 
     Employee getEmployeeById(Long id);
 }

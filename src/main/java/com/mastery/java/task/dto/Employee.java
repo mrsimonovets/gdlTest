@@ -36,7 +36,7 @@ public class Employee {
 
     @Column(name = "gender")
     @Enumerated(EnumType.STRING)
-    @Schema(example = "Male")
+    @Schema(example = "MALE")
     private Gender gender;
 
     @Column(name = "date_of_birth")
@@ -116,7 +116,6 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", departmentId=" + departmentId +
