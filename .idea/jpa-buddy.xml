@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JpaBuddyIdeaProjectConfig">
+    <option name="defaultUnitInitialized" value="true" />
+    <option name="updateChangeLogPath" value="src/main/resources/db/changelog/changelog.sql" />
+    <option name="updateDbConnectionName" value="da18c227-434d-4cf8-9bec-1c1604cc6680" />
+  </component>
+</project>

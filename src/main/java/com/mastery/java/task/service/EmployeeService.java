@@ -15,4 +15,9 @@ public interface EmployeeService {
     List<Employee> getAllEmployees(String firstName, String lastName);
 
     Employee getEmployeeById(Long id);
+
+    void addEmployeeToQueue(Employee employee);
+
+    void readEmployeeFromQueue(Employee employee);
+
 }

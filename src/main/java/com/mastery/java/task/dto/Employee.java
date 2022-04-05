@@ -1,6 +1,5 @@
 package com.mastery.java.task.dto;
 
-
 import com.mastery.java.task.validator.ValidAge;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -48,6 +47,17 @@ public class Employee {
     }
 
     public Employee(String firstName, String lastName, int departmentId, String jobTitle, Gender gender, LocalDate dateOfBirth) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.departmentId = departmentId;
+        this.jobTitle = jobTitle;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
+    }
+
+//    @JsonCreator
+    public Employee(Long id, String firstName, String lastName, int departmentId, String jobTitle, Gender gender, LocalDate dateOfBirth) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.departmentId = departmentId;

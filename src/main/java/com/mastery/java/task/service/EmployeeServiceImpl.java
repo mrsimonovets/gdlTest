@@ -3,24 +3,24 @@ package com.mastery.java.task.service;
 import com.mastery.java.task.dao.EmployeeRepository;
 import com.mastery.java.task.dto.Employee;
 import com.mastery.java.task.exception.MyServiceNotFoundException;
-import com.mastery.java.task.rest.EmployeeController;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.jms.annotation.JmsListener;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
 
     private EmployeeRepository employeeRepository;
+    private JmsTemplate jmsTemplate;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+
+
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, JmsTemplate jmsTemplate) {
         this.employeeRepository = employeeRepository;
+        this.jmsTemplate = jmsTemplate;
     }
-
-    private final Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);
 
     @Override
     public List<Employee> getAllEmployees(String firstName, String lastName) {
@@ -29,10 +29,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Employee getEmployeeById(Long id) {
-        return employeeRepository.findById(id).orElseThrow(() -> {
-            logger.warn("No employee found with id = {}", id);
-            return new MyServiceNotFoundException("There is no employee with id = " + id);
-        });
+        return employeeRepository.findById(id)
+                .orElseThrow(() -> new MyServiceNotFoundException(String.format("There is no employee with id = %s", id)));
     }
 
     @Override
@@ -41,8 +39,20 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
+    public void addEmployeeToQueue(Employee employee){
+        jmsTemplate.convertAndSend("firstqueue", employee);
+    }
+
+    @Override
+    @JmsListener(destination = "firstqueue")
+    public void readEmployeeFromQueue(Employee employee){
+        System.out.println(employee);
+    }
+
+    @Override
     public void updateEmployee(Long id, Employee updatedEmployee) {
-        Employee employee = employeeRepository.getById(id);
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new MyServiceNotFoundException(String.format("There is no employee with id = %s", id)));
 
         employee.setFirstName(updatedEmployee.getFirstName());
         employee.setLastName(updatedEmployee.getLastName());
@@ -56,7 +66,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public void deleteEmployee(Long id) {
-        employeeRepository.deleteById(id);
+        employeeRepository.findById(id).ifPresent(employee -> employeeRepository.deleteById(id));
     }
 
 }

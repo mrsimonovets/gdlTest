@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet  id="add-employees"  author="ilyasimonovets">
+        <insert tableName="employee">
+            <column name="first_name" value="Ivan"/>
+            <column name="last_name" value="Ivanov"/>
+            <column name="department_id" value="1"/>
+            <column name="job_title" value="Developer"/>
+            <column name="gender" value="MALE"/>
+            <column name="date_of_birth" value="1995-02-18"/>
+        </insert>
+
+        <insert tableName="employee">
+            <column name="first_name" value="Boris"/>
+            <column name="last_name" value="Godunov"/>
+            <column name="department_id" value="2"/>
+            <column name="job_title" value="HR"/>
+            <column name="gender" value="MALE"/>
+            <column name="date_of_birth" value="1985-12-18"/>
+        </insert>
+
+        <insert tableName="employee">
+            <column name="first_name" value="Kira"/>
+            <column name="last_name" value="Chi"/>
+            <column name="department_id" value="1"/>
+            <column name="job_title" value="Manager"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="date_of_birth" value="1985-08-02"/>
+        </insert>
+
+        <insert tableName="employee">
+            <column name="first_name" value="Elizaveta"/>
+            <column name="last_name" value="Ahmatova"/>
+            <column name="department_id" value="3"/>
+            <column name="job_title" value="HR"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="date_of_birth" value="1999-11-25"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
