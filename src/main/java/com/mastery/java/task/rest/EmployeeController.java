@@ -126,9 +126,7 @@ public class EmployeeController {
 
     @Operation(
             summary = "Delete employee",
-            description = "Delete employee from the database",
-            responses = @ApiResponse(description = "OK", responseCode = "200",
-                    content = @Content(schema = @Schema(type = "string")))
+            description = "Delete employee from the database"
     )
     @DeleteMapping("/{id}")
     public void deleteEmployee(@Positive(message = "id should be more than 1") @PathVariable Long id){
