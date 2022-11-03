@@ -10,12 +10,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService{
+public class EmployeeServiceImpl implements EmployeeService {
 
     private EmployeeRepository employeeRepository;
     private JmsTemplate jmsTemplate;
-
-
 
     public EmployeeServiceImpl(EmployeeRepository employeeRepository, JmsTemplate jmsTemplate) {
         this.employeeRepository = employeeRepository;
@@ -39,13 +37,13 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public void addEmployeeToQueue(Employee employee){
+    public void addEmployeeToQueue(Employee employee) {
         jmsTemplate.convertAndSend("firstqueue", employee);
     }
 
     @Override
     @JmsListener(destination = "firstqueue")
-    public void readEmployeeFromQueue(Employee employee){
+    public void readEmployeeFromQueue(Employee employee) {
         System.out.println(employee);
     }
 

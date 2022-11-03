@@ -36,13 +36,12 @@ import java.util.List;
 })
 public class EmployeeController {
 
-    private EmployeeService employeeService;
+    private final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+    private final EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
-
-    private final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
     @Operation(
             summary = "Get all employees",
@@ -58,7 +57,7 @@ public class EmployeeController {
     public List<Employee> getAllEmployees(@RequestParam(value = "first_name", defaultValue = "")
                                           @Parameter(description = "Part of first name") String firstName,
                                           @RequestParam(value = "last_name", defaultValue = "")
-                                          @Parameter(description = "Part of last name") String lastName){
+                                          @Parameter(description = "Part of last name") String lastName) {
         logger.info("Method getAllEmployees() takes firstName = {}, lastName = {}", firstName, lastName);
         return employeeService.getAllEmployees(firstName, lastName);
     }
@@ -80,7 +79,7 @@ public class EmployeeController {
             })
     @GetMapping("/{id}")
     public Employee getEmployeeById(@Positive(message = "id should be more than 1")
-                                    @PathVariable Long id){
+                                    @PathVariable Long id) {
         logger.info("Method getEmployeeById() takes id = {}", id);
         return employeeService.getEmployeeById(id);
     }
@@ -96,7 +95,7 @@ public class EmployeeController {
                     )
             })
     @PostMapping
-    public void addEmployee(@RequestBody @Valid Employee employee){
+    public void addEmployee(@RequestBody @Valid Employee employee) {
         logger.info("Method addEmployee() takes employee: {}", employee);
         employeeService.addEmployee(employee);
     }
@@ -118,18 +117,17 @@ public class EmployeeController {
             })
     @PutMapping("/{id}")
     public void updateEmployee(@Positive(message = "id should be more than 1")
-                               @PathVariable Long id , @RequestBody @Valid Employee updatedEmployee){
+                               @PathVariable Long id, @RequestBody @Valid Employee updatedEmployee) {
         logger.info("Method updateEmployee() takes id = {}, employee {}", id, updatedEmployee);
         employeeService.updateEmployee(id, updatedEmployee);
     }
-
 
     @Operation(
             summary = "Delete employee",
             description = "Delete employee from the database"
     )
     @DeleteMapping("/{id}")
-    public void deleteEmployee(@Positive(message = "id should be more than 1") @PathVariable Long id){
+    public void deleteEmployee(@Positive(message = "id should be more than 1") @PathVariable Long id) {
         logger.info("Method deleteEmployee() takes id = {}", id);
         employeeService.deleteEmployee(id);
     }

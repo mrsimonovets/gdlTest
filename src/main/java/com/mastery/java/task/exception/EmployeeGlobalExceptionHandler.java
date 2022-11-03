@@ -17,29 +17,28 @@ public class EmployeeGlobalExceptionHandler {
 
     @ExceptionHandler(MyServiceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleNoSuchEmployeeException(MyServiceNotFoundException e){
+    public String handleNoSuchEmployeeException(MyServiceNotFoundException e) {
         logger.error(e.getMessage(), e);
         return e.getMessage();
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
+    public String handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         logger.error(e.getMessage(), e);
         return e.getMessage();
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handleConstraintViolationException(ConstraintViolationException e){
+    public String handleConstraintViolationException(ConstraintViolationException e) {
         logger.error(e.getMessage(), e);
         return e.getMessage();
     }
 
-//     обработать все ошибки на сервере
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public String handleException(Exception e){
+    public String handleALLServerExceptions(Exception e) {
         logger.error(e.getMessage(), e);
         return "Something went wrong";
     }

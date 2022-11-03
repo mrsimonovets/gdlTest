@@ -33,9 +33,8 @@ import javax.validation.Valid;
 })
 public class ActiveMQController {
 
-    private EmployeeService employeeService;
-
     private final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+    private EmployeeService employeeService;
 
     public ActiveMQController(EmployeeService employeeService) {
         this.employeeService = employeeService;
@@ -52,7 +51,7 @@ public class ActiveMQController {
                     )
             })
     @PostMapping
-    public void addEmployeeThroughQueue(@RequestBody @Valid Employee employee){
+    public void addEmployeeThroughQueue(@RequestBody @Valid Employee employee) {
         logger.info("IN: addEmployee() - employee: {}", employee);
         employeeService.addEmployeeToQueue(employee);
         employeeService.addEmployee(employee);

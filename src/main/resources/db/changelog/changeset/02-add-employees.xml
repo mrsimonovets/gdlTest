@@ -5,12 +5,12 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 		            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
 
-    <changeSet  id="add-employees"  author="ilyasimonovets">
+    <changeSet  id="add-employees"  author="ilyasimanavets">
         <insert tableName="employee">
             <column name="first_name" value="Ivan"/>
             <column name="last_name" value="Ivanov"/>
             <column name="department_id" value="1"/>
-            <column name="job_title" value="Developer"/>
+            <column name="job_title" value="DEVELOPER"/>
             <column name="gender" value="MALE"/>
             <column name="date_of_birth" value="1995-02-18"/>
         </insert>
@@ -28,7 +28,7 @@
             <column name="first_name" value="Kira"/>
             <column name="last_name" value="Chi"/>
             <column name="department_id" value="1"/>
-            <column name="job_title" value="Manager"/>
+            <column name="job_title" value="MANAGER"/>
             <column name="gender" value="FEMALE"/>
             <column name="date_of_birth" value="1985-08-02"/>
         </insert>
@@ -37,10 +37,20 @@
             <column name="first_name" value="Elizaveta"/>
             <column name="last_name" value="Ahmatova"/>
             <column name="department_id" value="3"/>
-            <column name="job_title" value="HR"/>
+            <column name="job_title" value="QA"/>
             <column name="gender" value="FEMALE"/>
             <column name="date_of_birth" value="1999-11-25"/>
         </insert>
+
+        <insert tableName="employee">
+            <column name="first_name" value="Tim"/>
+            <column name="last_name" value="Cook"/>
+            <column name="department_id" value="1"/>
+            <column name="job_title" value="SEO"/>
+            <column name="gender" value="MALE"/>
+            <column name="date_of_birth" value="1960-11-01"/>
+        </insert>
+
     </changeSet>
 
 </databaseChangeLog>

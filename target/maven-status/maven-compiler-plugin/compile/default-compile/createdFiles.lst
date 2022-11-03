@@ -1,5 +1,6 @@
 com\mastery\java\task\validator\ValidAge.class
 com\mastery\java\task\dto\Employee.class
+com\mastery\java\task\dto\JobTitle.class
 com\mastery\java\task\rest\ActiveMQController.class
 com\mastery\java\task\WebApplication.class
 com\mastery\java\task\rest\EmployeeController.class
